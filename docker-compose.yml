@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+ web_dev:
+  build: .
+  ports:
+   - "4000:4000"
+  volumes:
+   - .:/app
+  environment:
+   - ENV=development
+   - PORT=4000
+
+ db:
+  image: mysql:latest
+  environment:
+    MYSQL_ROOT_PASSWORD : tochange
+    MYSQL_DATABASE : tochange
+    MYSQL_USER : tochange
+    MYSQL_PASSWORD : tochange
+  ports :
+    - 3306:3306
