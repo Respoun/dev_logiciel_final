@@ -2,8 +2,6 @@ import os
 import sys
 import requests
 from flask import jsonify, request, make_response, send_from_directory, render_template
-from flaskext.mysql import MySQL
-
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 os.environ.update({'ROOT_PATH': ROOT_PATH})
