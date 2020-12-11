@@ -11,19 +11,20 @@ LOG = logger.get_root_logger(
     __name__, filename=os.path.join(ROOT_PATH, 'output.log'))
 
 
-@app.route('/livre', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-def livre():
+@app.route('/exemplaire', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+def exemplaire():
     if request.method == 'GET':
         try:
-            data = mongo.db.livre.find()
+            data = mongo.db.exemplaire.find()
             response = []
             for document in data:
                 document['_id'] = str(document['_id'])
-                theme = mongo.db.theme.find_one({"idtheme": document["idtheme"]},{"_id": False, "theme": True})
-                auteur = mongo.db.auteur.find_one({"id_auteur": document["id_auteur"]}, {"_id": False})
-                full_data = {**document, **theme, **auteur}
+                livre = mongo.db.livre.find_one({"idlivre": document["idlivre"]},{'_id': False, 'titre': True, 'id_auteur': True, 'idemplacement': True})
+                auteur = mongo.db.auteur.find_one({"id_auteur": livre["id_auteur"]}, {"_id": False})
+                emplacement = mongo.db.emplacement.find_one({"idemplacement": livre["idemplacement"]},{'_id': False, 'nomemplacement': True})
+                full_data = {**document, **livre, **auteur, **emplacement}
                 response.append(full_data)
-            return render_template("livre.html", response=response), 200
+            return render_template("exemplaire.html", response=response), 200
         except Exception as e:
              return jsonify({'ok': False, 'message': str(e)}), 500
 

@@ -1,4 +1,5 @@
 {% extends"layout.html" %}
+
 {%block content %}
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -8,21 +9,21 @@
 <script type="text/javascript" charset="utf8" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 <script type="css" charset="utf8" src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script>
 
-  <table id="livre" class="display" style="width:100%">
-    <thead>
-      <tr>
-        <th>Id livre</th>
-        <th>Titre</th>
-        <th>Auteur</th>
-        <th>Description</th>
-        <th>Theme</th>
-        <th>Code</th>
-        <th>ISBN</th>
-      </tr>
-    </thead>
-  </table>
+<table id="example" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Rôle</th>
+      <th>Exemplaire ID</th>
+      <th>Titre</th>
+    </tr>
+  </thead>
+</table>
 
 <script>
+
   var dataset = '{{ response|tojson }}';
   var strObj = dataset;
   var jsonStr = strObj.replace(/(\w+:)|(\w+ :)/g, function(s) {
@@ -31,24 +32,21 @@
   var obj = JSON.parse(jsonStr);
 
   $(document).ready(function() {
-    $('#livre').DataTable({
-        "pageLength": 25,
+    $('#example').DataTable({
         data: obj,
         "columns": [
-        { "data": 'idlivre' },
-        { "data": 'titre' },
-        { "data": 'name' },
-        { "data": 'description' },
-        { "data": 'theme' },
-        { "data": 'code' },
-        { "data": 'isbn' }
+        { "data": 'idemprunt' },
+        { "data": 'nom' },
+        { "data": 'prenom' },
+        { "data": 'role' },
+        { "data": 'idexemplaire' },
+        { "data": 'titre' }
       ],
       'fnRowCallback' : function(row, data, dataIndex, dataIndexFull) {
           $(row).css('background-color', '#e9ecef');
       },
     });
-});
-
-</script>
+  });
+  </script>
 
 {% endblock content %}
