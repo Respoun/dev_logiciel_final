@@ -29,7 +29,6 @@ GET ROUTES
 def index():
     return send_from_directory('dist', 'index.html')
 
-
 @app.route('/<path:path>')
 def static_proxy(path):
     file_name = path.split('/')[-1]
