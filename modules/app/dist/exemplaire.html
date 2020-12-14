@@ -1,0 +1,55 @@
+{% extends"layout.html" %}
+
+{%block content %}
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+<script type="css" charset="utf8" src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script>
+
+<table id="example" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Disponibilite</th>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Emplacement</th>
+    </tr>
+  </thead>
+</table>
+
+<script>
+var dataset = '{{ response|tojson }}';
+var strObj = dataset;
+var jsonStr = strObj.replace(/(\w+:)|(\w+ :)/g, function(s) {
+  return '"' + s.substring(0, s.length-1) + '":';
+});
+var obj = JSON.parse(jsonStr);
+
+$(document).ready(function() {
+  $('#example').DataTable({
+    data: obj,
+    "pageLength": 25,
+    "columns": [
+      { "data": 'idexemplaire' },
+      { "data": 'disponibilite' },
+      { "data": 'titre' },
+      { "data": 'name' },
+      { "data": 'nomemplacement'},
+    ],
+    'fnRowCallback' : function(row, data, dataIndex, dataIndexFull) {
+      if(data.disponibilite == 0) {
+        $(row).css('background-color', '#F0DDDD');
+      } else {
+        $(row).css('background-color', '#DEF1D7');
+      }
+    },
+  });
+});
+
+  </script>
+
+{% endblock content %}
