@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "dev-biblio-final"
+          heroku_email: ${{secrets.HEROKU_API_MAIL}}
+          MONGO_DB_URI: ${{secrets.MONGO_DB_URI}}
+          ENV: ${{secrets.ENV}}
+          PORT: ${{secrets.PORT}}
+          usedocker: true
