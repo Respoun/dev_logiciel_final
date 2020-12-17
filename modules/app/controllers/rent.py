@@ -1,4 +1,4 @@
-''' controller and routes for livre '''
+''' controller and routes for Rent '''
 import os
 from flask import request, jsonify, render_template
 from app import app, mongo
@@ -30,7 +30,6 @@ def rent():
             query = { "idexemplaire": data["idexemplaire"] }
             value = { "$set": { "disponibilite": "0" } }
 
-            
             if data.get('idemprunt', None) is not None and data.get('dateemprunt', None) is not None and data.get('idutilisateur', None) is not None and data.get('idexemplaire', None) is not None:
                 mongo.db.emprunt.insert_one(data)
                 mongo.db.exemplaire.update_one(query,value)

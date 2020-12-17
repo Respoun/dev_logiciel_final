@@ -3,9 +3,9 @@ name: Deploy
 on:
   push:
     branches:
-      - master
-      
-jobs:        
+      - main
+
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +15,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "dev-biblio-final"
           heroku_email: ${{secrets.HEROKU_API_MAIL}}
-          mongo_db_uri: ${{secrets.MONGO_DB_URI}}
-          env: ${{secrets.ENV}}  
+          MONGO_DB_URI: ${{secrets.MONGO_DB_URI}}
+          ENV: ${{secrets.ENV}}
+          PORT: ${{secrets.PORT}}
           usedocker: true

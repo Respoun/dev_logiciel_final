@@ -19,7 +19,7 @@ class JSONEncoder(json.JSONEncoder):
 
 app = Flask(__name__,template_folder="dist")
 
-app.config['MONGO_URI'] = os.environ.get('DB')
+app.config['MONGO_URI'] = os.environ.get('MONGO_DB_URI')
 mongo = PyMongo(app)
 
 app.static_folder = 'static'

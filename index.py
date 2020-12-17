@@ -13,9 +13,6 @@ from app import app
 LOG = logger.get_root_logger(os.environ.get(
     'ROOT_LOGGER', 'root'), filename=os.path.join(ROOT_PATH, 'output.log'))
 
-PORT = os.environ.get('PORT')
-
-
 @app.errorhandler(404)
 def not_found(error):
     """ error handler """
@@ -37,6 +34,7 @@ def static_proxy(path):
 
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
     LOG.info('running environment: %s', os.environ.get('ENV'))
     app.config['DEBUG'] = os.environ.get('ENV') == 'development'
-    app.run(host='0.0.0.0', port=int(PORT))
+    app.run(host='0.0.0.0', port=port)

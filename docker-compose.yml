@@ -9,5 +9,4 @@ services:
   environment:
    - ENV=development
    - PORT=4000
-   - DB=mongodb://<to-change>@ds044979.mlab.com:44979/dev_logiciel_final?retryWrites=false
- 
+   - MONGO_DB_URI=<to-change>

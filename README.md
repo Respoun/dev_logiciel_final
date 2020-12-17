@@ -5,10 +5,10 @@ How to get project
 ```
 git clone https://github.com/Respoun/dev_logiciel_final.git
 ```
-## Change the variables 
-In docker compose 
+## Change the variables
+In docker compose
 ```
-- DB=mongodb://<your-password>@ds044979.mlab.com:44979/dev_logiciel_final?retryWrites=false
+- DB=<set-your-uri>
 ```
 
 ## Run the project
